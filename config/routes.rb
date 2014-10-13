@@ -8,6 +8,9 @@ Rails.application.routes.draw do
   resources :carts
   resources :products
   resources :users
+  namespace :admin do
+    resources :users:
+  end
   resources :sessions, only: [ :new, :create, :destroy] do
     # member do
     #   delete 'signout' => 'sessions#destroy'

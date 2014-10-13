@@ -1,45 +1,126 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Books Online Store</title>
-		<%= stylesheet_link_tag "application", media: "all","data-turbolinks-track" => true %>
-		<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-		<%= csrf_meta_tags %>
-	</head>
-	<body class="<%= controller.controller_name %>">
-		<div id="banner">
-			<%= image_tag("logo.png") %>
-			<%= @page_title || "BookStore" %>
-			<% if signed_in?%>
-			<div id="user">
-			<!-- <ul> -->
-				welcome,<%= current_user.name %>
-				<%= link_to "logout", signout_path, method: "delete"%>
-			<!-- </ul> -->
-			</div>
-			<% else %>
-				<%= link_to "login",signin_path %>
-			<% end %>
-		</div>
-		<div id="columns">
-			<div id="side">
-				<div id="cart">	
-				<% if @cart %>
-				<%= hidden_div_if(@cart.line_items.empty?, id: 'cart') do %>
-					<%= render @cart %>
-				<% end %>
-				<% end %>
-				</div>
-				<ul>
-					<li><%= link_to "Home",store_path %></li>
-					<li><a href="http://www..../faq">Questions</a></li>
-					<li><a href="http://www..../news">News</a></li>
-					<li><a href="http://www..../contact">Contact</a></li>
-				</ul>
-			</div>
-			<div id="main">
-				<%= yield %>
-			</div>
-		</div>
-	</body>
-</html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <!-- 新 Bootstrap 核心 CSS 文件 -->
+        <!-- <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap.min.css"> -->
+        <!-- 可选的Bootstrap主题文件（一般不用引入） -->
+        <!-- <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"> -->
+        <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+        <!--<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script> -->
+        <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+        <!--<script src="http://cdn.bootcss.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>-->
+        <%= stylesheet_link_tag "application", media: "all","data-turbolinks-track" => true %>
+        <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+        <%= csrf_meta_tags %>
+        <title>Book Store Console</title>
+    </head>
+    <body>
+        <!--导航条-->
+        <nav class="navbar navbar-inverse" role="navigation">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    </button>
+                    
+                    <a class="navbar-brand" href="#">后台管理</a>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#">Link</a></li>
+                        <li><a href="#">Link</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">Action</a></li>
+                                <li><a href="#">Another action</a></li>
+                                <li><a href="#">Something else here</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">Separated link</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">One more separated link</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <% if signed_in?%>
+                            <div id="user">
+                                <!-- <ul> -->
+                                welcome,<%= current_user.name %>
+                                <%= link_to "logout", signout_path, method: "delete"%>
+                                <!-- </ul> -->
+                            </div>
+                            <% else %>
+                            <%= link_to "login",signin_path %>
+                            <% end %>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">Action</a></li>
+                                <li><a href="#">Another action</a></li>
+                                <li><a href="#">Something else here</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">Separated link</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    </div><!-- /.navbar-collapse -->
+                    </div><!-- /.container-fluid -->
+                </nav>
+                <div class="row">
+                    <div class="col-md-3">
+                      <%# if current_user.level==3 %>
+                      <% if 3==2%>
+                        <div id="cart"> 
+                        <% if @cart %>
+                        <%= hidden_div_if(@cart.line_items.empty?, id: 'cart') do %>
+                        <%= render @cart %>
+                        <% end %>
+  
+                        <% end %>
+                        </div>
+                      <%else %>
+                        <ul class="nav nav-pills nav-stacked" role="tablist">
+                            <li role="presentation" class="active"><%= link_to "Home",store_path %></li>
+                            <li role="presentation"><a href="#">Profile</a></li>
+                            <li role="presentation"><a href="#">Messages</a></li>
+                        </ul>
+                      <% end %>
+                    </div>
+                    <div class="col-md-9">
+                        <table class="table table-condensed">
+                            
+                            <tr class="active">
+                                <td>dsafasgasdg</td>
+                                <td>agdfg</td>
+                            </tr>
+                            <tr class="success">
+                                <td>dsafasgasdg</td>
+                                <td>agdfg</td>
+                            </tr>
+                            <tr>
+                                <td>dsafasgasdg</td>
+                                <td>agdfg</td>
+                            </tr>
+                            <tr>
+                                <td>dsafasgasdg</td>
+                                <td>agdfg</td>
+                            </tr>
+                            <tr>
+                                <td>dsafasgasdg</td>
+                                <td>agdfg</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </body>
+        </html>
