@@ -1,9 +1,12 @@
 class UsersController < ApplicationController
 
   before_action :signed_in_user,only: [:index,:edit,:destroy,:show,:update]
+
+  layout "consolelayout", only: [:index, :show, :edit]
   
   def index
     @users=User.all
+
   end
 
   def new

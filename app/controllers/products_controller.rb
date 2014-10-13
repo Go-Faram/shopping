@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
   # include SessionsHelper
+  layout "consolelayout" ,only: [:index, :new, :edit]
   before_action :signed_in_user, only: [:edit, :update, :destroy, :create]
   before_action :set_product, only: [:show, :edit, :update, :destroy]
 
@@ -30,7 +31,7 @@ class ProductsController < ApplicationController
 
     respond_to do |format|
       if @product.save
-        format.html { redirect_to @product, notice: 'Product was successfully created.' }
+        format.html { redirect_to products_url, notice: 'Product was successfully created.' }
         format.json { render :show, status: :created, location: @product }
       else
         format.html { render :new }

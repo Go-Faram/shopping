@@ -33,7 +33,7 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="#">Link</a></li>
+                        <li class="active"><%= link_to "主页",admin_console_index_path %></li>
                         <li><a href="#">Link</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
@@ -54,6 +54,7 @@
                             <% if signed_in?%>
                             <div id="user">
                                 <!-- <ul> -->
+
                                 welcome,<%= current_user.name %>
                                 <%= link_to "logout", consolelogout_path, method: "delete"%>
                                 <!-- </ul> -->
@@ -62,64 +63,49 @@
                             <%= link_to "login",signin_path %>
                             <% end %>
                         </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something else here</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">Separated link</a></li>
-                            </ul>
-                        </li>
+                        
                     </ul>
                     </div><!-- /.navbar-collapse -->
                     </div><!-- /.container-fluid -->
                 </nav>
                 <div class="row">
-                    <div class="col-md-3">
-                      <%# if current_user.level==3 %>
-                      <% if 3==2%>
-                        <div id="cart"> 
-                        <% if @cart %>
-                        <%= hidden_div_if(@cart.line_items.empty?, id: 'cart') do %>
-                        <%= render @cart %>
-                        <% end %>
-  
-                        <% end %>
-                        </div>
-                      <%else %>
-                        <ul class="nav nav-pills nav-stacked" role="tablist">
-                            <li role="presentation" class="active"><%= link_to "Home",store_path %></li>
-                            <li role="presentation"><a href="#">Profile</a></li>
-                            <li role="presentation"><a href="#">Messages</a></li>
-                        </ul>
-                      <% end %>
-                    </div>
-                    <div class="col-md-9">
-                        <table class="table table-condensed">
+                    <div class="col-md-2">
+                        <%# if current_user.level==3 %>
+                        <% if 3==2%>
+                        <div id="cart">
+                            <% if @cart %>
+                            <%= hidden_div_if(@cart.line_items.empty?, id: 'cart') do %>
+                            <%= render @cart %>
+                            <% end %>
                             
-                            <tr class="active">
-                                <td>dsafasgasdg</td>
-                                <td>agdfg</td>
-                            </tr>
-                            <tr class="success">
-                                <td>dsafasgasdg</td>
-                                <td>agdfg</td>
-                            </tr>
-                            <tr>
-                                <td>dsafasgasdg</td>
-                                <td>agdfg</td>
-                            </tr>
-                            <tr>
-                                <td>dsafasgasdg</td>
-                                <td>agdfg</td>
-                            </tr>
-                            <tr>
-                                <td>dsafasgasdg</td>
-                                <td>agdfg</td>
-                            </tr>
-                        </table>
+                            <% end %>
+                        </div>
+                        <%else %>
+                        <ul class="nav nav-pills nav-stacked" role="tablist">
+                            <% if current_user.level==1 %>
+                            <li role="presentation" class="active"><%= link_to "用户管理",users_path %></li>
+                            <li role="presentation">
+                                <%= link_to "订单管理",orders_path %>
+                            </li>
+                            <% end %>
+                            <li role="presentation"><%= link_to "商品管理",products_path %></li>
+                            <li role="presentation"><%= link_to "修改密码" %></li>
+                        </ul>
+                        <% end %>
+                    </div>
+                    <div class="col-md-10">
+                            <%= yield %>
+                        <div align="center">
+                        <ul class="pagination">
+                            <li><a href="#">&laquo;</a></li>
+                            <li><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                            <li><a href="#">&raquo;</a></li>
+                        </ul>
+                        </div>
                     </div>
                 </div>
             </body>

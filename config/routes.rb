@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   # get 'admin' => 'admin#console'
   resources :carts
   resources :products
-  resources :users
+  resources :users do
+
+  end
   namespace :admin do
     resources :console do
       member do
@@ -24,8 +26,9 @@ Rails.application.routes.draw do
   get 'signup' => 'users#new'
   get 'signin' => 'sessions#new'
   get 'consolelogin' => 'admin/console#login'
-  match 'consolelogout',to: 'admin/console#logout',via: :delete
-  match 'signout',to: 'sessions#destroy', via: :delete
+  
+  delete 'consolelogout',to: 'admin/console#logout'
+  delete 'signout',to: 'sessions#destroy'
 
   # get 'users/index'
 
