@@ -4,12 +4,17 @@ Rails.application.routes.draw do
   resources :line_items
 
   get 'store/index'
-
+  # get 'admin' => 'admin#console'
   resources :carts
   resources :products
   resources :users
   namespace :admin do
-    resources :users:
+    resources :console do
+      member do
+        get 'login'
+        get 'logout'
+      end
+    end
   end
   resources :sessions, only: [ :new, :create, :destroy] do
     # member do
@@ -18,6 +23,8 @@ Rails.application.routes.draw do
   end
   get 'signup' => 'users#new'
   get 'signin' => 'sessions#new'
+  get 'consolelogin' => 'admin/console#login'
+  match 'consolelogout',to: 'admin/console#logout',via: :delete
   match 'signout',to: 'sessions#destroy', via: :delete
 
   # get 'users/index'
