@@ -8,8 +8,9 @@ Rails.application.routes.draw do
   resources :carts
   resources :products
   resources :users do
-
   end
+
+
   namespace :admin do
     resources :console do
       member do
@@ -28,16 +29,17 @@ Rails.application.routes.draw do
   get 'signup' => 'users#new'
   get 'signin' => 'sessions#new'
   get 'consolelogin' => 'admin/sessions#new'
-  
+
   delete 'consolelogout',to: 'admin/sessions#destroy'
   delete 'signout',to: 'sessions#destroy'
+
 
   # get 'users/index'
 
   # get 'users/show'
 
   root 'store#index',as: 'store'
-    # The priority is  based upon order of creation: first created -> highest priority.
+  # The priority is  based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"

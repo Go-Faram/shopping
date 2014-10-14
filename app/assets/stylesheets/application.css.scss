@@ -1,5 +1,13 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+.carousel-inner{
+  padding-left: 190px;
+ 
+.item {
+  height: 400px;
+
+}
+}
 #banner {
   background: #9c9;
   padding: 10px;
