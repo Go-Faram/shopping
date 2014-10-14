@@ -17,6 +17,8 @@ Rails.application.routes.draw do
         get 'logout'
       end
     end
+    resources :sessions,:orders,:products,:users
+
   end
   resources :sessions, only: [ :new, :create, :destroy] do
     # member do
@@ -25,9 +27,9 @@ Rails.application.routes.draw do
   end
   get 'signup' => 'users#new'
   get 'signin' => 'sessions#new'
-  get 'consolelogin' => 'admin/console#login'
+  get 'consolelogin' => 'admin/sessions#new'
   
-  delete 'consolelogout',to: 'admin/console#logout'
+  delete 'consolelogout',to: 'admin/sessions#destroy'
   delete 'signout',to: 'sessions#destroy'
 
   # get 'users/index'

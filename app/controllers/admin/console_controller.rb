@@ -3,7 +3,9 @@ class Admin::ConsoleController < ApplicationController
   before_action :signed_in_user,only: [:index,:edit,:destroy,:show,:update]
 
   
+  def new
 
+  end
   def index
     if @current_user.level==3
       redirect_to signed_in_user
@@ -14,7 +16,7 @@ class Admin::ConsoleController < ApplicationController
 
   def login
     render layout: false
-  end
+  end               
 
   def logout
     sign_out

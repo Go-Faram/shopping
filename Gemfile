@@ -43,6 +43,6 @@ gem 'autoprefixer-rails'
 gem 'bcrypt-ruby', '3.1.2'
 
 #debug
-gem 'debase'
-gem 'debugger'
-gem 'byebug'
+#gem 'debase'
+#gem 'debugger'
+#gem 'byebug'
