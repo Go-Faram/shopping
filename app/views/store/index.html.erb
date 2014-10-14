@@ -1,22 +1,25 @@
-<% if notice %>
-<p id="notice"><%= notice %></p>
-<% end %>
-<h1>图书列表</h1>
-<%# cache ['store', Product.latest] do %>
-<% @products.each do |product| %>
-<% @index = 0%>
-<% ++@index %>
-<% if (@index%3)==1 %>
-<div class="row">
-<% end %>
-          <div class="col-md-4">
-            <%#= image_tag(product.image_url) %>
-            <img src="assets/<%= product.image_url %>" style{height:10px}>
-            <h3><%= product.title %></h3>
-            <%= sanitize(product.description) %>
-            <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-          </div>
- <% if (@index%3)==1%>
- </div>
-<% end %>
-<% end %>
+<%= render "carousel" %>
+<div class="container">
+	<% if notice %>
+	<p id="notice"><%= notice %></p>
+	<% end %>
+	<h1>图书列表</h1>
+	<%# cache ['store', Product.latest] do %>
+	<% @products.each do |product| %>
+	<% @index = 0%>
+	<% ++@index %>
+	<% if (@index%3)==1 %>
+	<div class="row">
+		<% end %>
+		<div class="col-md-4">
+			<%#= image_tag(product.image_url) %>
+			<img src="assets/<%= product.image_url %>" style{height:10px}>
+			<h3><%=link_to product.title,product%></h3>
+			<%#= sanitize(product.description) %>
+			 <%= number_to_currency(product.price) %>
+		</div>
+		<% if (@index%3)==1%>
+	</div>
+	<% end %>
+	<% end %>
+</div>
