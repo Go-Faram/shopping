@@ -1,6 +1,6 @@
-class Admin::UsersController < ApplicationController
+class Admin::UsersController < Admin::BaseController
+
   before_action :signed_in_user,only: [:index,:edit,:destroy,:show,:update]
-  layout "consolelayout"
 
   def index
     @users=User.all

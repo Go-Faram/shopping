@@ -1,7 +1,7 @@
 class CartsController < ApplicationController
-  before_action :signed_in_user, only: [:index, :show, :edit, :update, :destroy, :create]
+  #before_action :signed_in_user, only: [:index, :edit, :update, :destroy, :create]
   before_action :set_cart, only: [:show, :edit, :update, :destroy]
-  before_action :check_access, only: [:show, :edit, :update, :destroy, :index]
+  #before_action :check_access, only: [:show, :edit, :update, :destroy, :index]
   # GET /carts
   # GET /carts.json
   def index

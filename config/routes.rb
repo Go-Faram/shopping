@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   resources :products
   resources :users do
   end
-
+  resources :sessions, only: [:new, :create, :destroy]
 
   namespace :admin do
     resources :console do
@@ -18,27 +18,26 @@ Rails.application.routes.draw do
         get 'logout'
       end
     end
-    resources :sessions,:orders,:products,:users
-
+    resources :sessions, :orders, :products, :users
   end
-  resources :sessions, only: [ :new, :create, :destroy] do
+
+
     # member do
     #   delete 'signout' => 'sessions#destroy'
     # end
-  end
   get 'signup' => 'users#new'
-  get 'signin' => 'sessions#new'
+  get 'signin' => 'sessions#create'
   get 'consolelogin' => 'admin/sessions#new'
 
-  delete 'consolelogout',to: 'admin/sessions#destroy'
-  delete 'signout',to: 'sessions#destroy'
+  delete 'consolelogout', to: 'admin/sessions#destroy'
+  delete 'signout', to: 'sessions#destroy'
 
 
   # get 'users/index'
 
   # get 'users/show'
 
-  root 'store#index',as: 'store'
+  root 'store#index', as: 'store'
   # The priority is  based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

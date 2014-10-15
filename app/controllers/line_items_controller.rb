@@ -1,12 +1,12 @@
 class LineItemsController < ApplicationController
   include CurrentCart
+  before_action :signed_in_user, only:[:edit, :update, :destroy]
   before_action :set_cart, only: [:create]
   before_action :set_line_item, only: [:show, :edit, :update, :destroy]
-
   # GET /line_items
   # GET /line_items.json
   def index
-    @line_items = LineItem.all
+    render plain: "url输入错误"
   end
 
   # GET /line_items/1

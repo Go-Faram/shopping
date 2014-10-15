@@ -1,13 +1,14 @@
 class OrdersController < ApplicationController
   include CurrentCart
-  layout "consolelayout" ,only: [:index]
+  #layout "consolelayout" ,only: [:index]
+  before_action :signed_in_user, only: [:new,:index,:show, :edit, :update, :destroy]
   before_action :set_cart, only: [:new, :create]
   before_action :set_order, only: [:show, :edit, :update, :destroy]
 
   # GET /orders
   # GET /orders.json
   def index
-    @orders = Order.all
+    @orders = @current_user.orders
   end
 
   # GET /orders/1
@@ -17,11 +18,17 @@ class OrdersController < ApplicationController
 
   # GET /orders/new
   def new
-    if @cart.line_items.empty?
-      redirect_to store_url, notice: "Your cart is empty"
-      return
-    end
-    @order = Order.new
+    if signed_in?
+        if @cart.line_items.empty?
+          redirect_to store_url, notice: "Your cart is empty"
+          return
+        end
+        # @current_user=current_user
+        @order =Order.new
+    else
+      redirect_to cart_path(Cart.find(session[:cart_id])), notice:"请登录"
+  end
+
   end
 
   # GET /orders/1/edit
@@ -31,8 +38,13 @@ class OrdersController < ApplicationController
   # POST /orders
   # POST /orders.json
   def create
-    @order = Order.new(order_params)
-    @order.add_line_items_from_cart(@cart)
+     @current_user=current_user
+    # @order = Order.new(order_params)
+    @order=current_user.orders.create(order_params)
+     @order.add_line_items_from_cart(@cart)
+    # @order=@current_user.orders(order_params)
+    # @current_user.orders.create(@order
+
 
     respond_to do |format|
       if @order.save

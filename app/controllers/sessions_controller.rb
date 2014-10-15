@@ -12,16 +12,11 @@ class SessionsController < ApplicationController
        # redirect_back_or user unless user.level!=3
        #   redirect_to admin_console_path
        # end
-       case user.level
-       when 3
-        then redirect_back_or user
-      else
-        redirect_to admin_console_index_path
-         
-       end
+      # redirect_back_or user
+      redirect_to store_path
     else
       flash.now[:error] = 'Invalid email/password combination' # Not quite right!
-      render 'new'
+      redirect_to store_path
     end
   end
 

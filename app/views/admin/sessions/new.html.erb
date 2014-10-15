@@ -21,7 +21,7 @@
   
   <div class="row">
   <div class="col-md-6  col-md-offset-4">
-    <%=form_for(:session, url: sessions_path,html:{class:"form_horizontal",role:"form"}) do |f| %>
+    <%=form_for(:session, url: admin_sessions_path, html:{class:"form_horizontal",role:"form"}) do |f| %>
     <%#=form_for([:admin,:session],html:{class:"form_horizontal",role:"form"}) do |f| %>
         <%=f.label :email%>
         <%=f.text_field :email%>
@@ -31,9 +31,7 @@
 
         <%=f.submit "Sign in",class: "btn btn-large btn-primary"%>
     <% end %>
-   <!--  <p>
-      New user?<%= link_to "Sign up now!",signup_path %>
-    </p> -->
+
   </div>
 </div>
     </div>

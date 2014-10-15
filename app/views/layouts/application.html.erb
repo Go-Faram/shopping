@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>网络书城</title>
+    <title>网络书城
+    </title>
     <%= stylesheet_link_tag "application", media: "all","data-turbolinks-track" => true %>
     <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
     <%= csrf_meta_tags %>
@@ -29,16 +30,43 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">网上书城</a>
+          <!-- <a class="navbar-brand" href="#">网上书城</a> -->
+          <%= link_to "网上书城",store_path, class:"navbar-brand" %>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <% if signed_in?%>
           <div id="user">
-            welcome,<%= current_user.name %>
-            <%= link_to "logout", signout_path, method: "delete"%>
+          <form class="navbar-form navbar-right" role="form">
+            <div class="form-group">
+              <%= link_to current_user.name,user_path(current_user) %>              
+            </div>
+            <!-- <button type="submit" class="btn btn-success">
+              
+            </button> -->
+            <%= link_to "退出", signout_path, method: "delete"%>
+            <%# if cart %>
+             <%= link_to '购物车', cart_path(Cart.find(session[:cart_id])) %>
+            <%# end %>
+          </form>
+          <%#= form_for %>
+            <%#= f.label :welcome style: "color:white"%>
+            <%#= current_user.name %>
+            <%#= link_to "logout", signout_path, method: "delete"%>
           </div>
           <% else %>
-          <form class="navbar-form navbar-right" role="form">
+          <%= form_for(:session, url: sessions_path , html: {class:"navbar-form navbar-right"}, role: 'form') do |f| %>
+            <div class="from-group">
+              <%=f.label :email, style: "color:white"%>
+              <%=f.text_field :email, class: "form-control", placeholder: 'sdfsdf' %>
+            <!-- </div>
+            <div class="from-group"> -->
+              <%=f.label :password,  style: "color:white"%>
+              <%=f.text_field :password  , class: "form-control"%>
+              <button type="submit" class="btn btn-success">Sign in</button>
+            </div>
+          <%end%>
+  
+          <!-- <form class="navbar-form navbar-right" role="form">
             <div class="form-group">
               <input type="text" placeholder="Email" class="form-control">
             </div>
@@ -46,14 +74,20 @@
               <input type="password" placeholder="Password" class="form-control">
             </div>
             <button type="submit" class="btn btn-success">Sign in</button>
-          </form>
+          </form> -->
           <% end %>
           </div><!--/.navbar-collapse -->
         </div>
       </nav>
 
       <!-- /container -->
+      <div align="center">
+      <br>
+      <br>
+      <br>
+      <br>
       <%= yield %>
+      </div>
       <footer>
         <p align="center">&copy; Company 2014</p>
       </footer>

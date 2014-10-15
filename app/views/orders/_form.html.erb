@@ -13,21 +13,25 @@
 
   <div class="field">
     <%= f.label :name %><br>
-    <%= f.text_field :name,size: 40 %>
+    <%= f.text_field :name,:value=>current_user.name, size: 40 %>
   </div>
   <div class="field">
     <%= f.label :address %><br>
-    <%= f.text_area :address, rows: 3, cols: 40 %>
+    <%= f.text_area :address,:value=>current_user.address ,rows: 1, cols: 40 %>
   </div>
   <div class="field">
     <%= f.label :email %><br>
-    <%= f.text_field :email, size: 40 %>
+    <%= f.text_field :email, :value=>current_user.email, size: 40 %>
+  </div>
+    <div class="field">
+    <%= f.label :phonenumber %><br>
+    <%= f.text_field :phonenumber, :value=>current_user.phonenumber, size: 40 %>
   </div>
   <div class="field">
     <%= f.label :pay_type %><br>
-    <%= f.select :pay_type, Order::PAYMENT_TYPES,prompt: 'Select a payment method' %>
+    <%= f.select :pay_type, Order::PAYMENT_TYPES,prompt: '选择支付方式' %>
   </div>
   <div class="actions">
-    <%= f.submit 'Place Order'%>
+    <%= f.submit '提交订单'%>
   </div>
 <% end %>

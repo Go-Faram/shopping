@@ -1,13 +1,13 @@
 class UsersController < ApplicationController
 
-  before_action :signed_in_user,only: [:index,:edit,:destroy,:show,:update]
+  before_action :signed_in_user,only: [:edit,:destroy,:show,:update]
 
-  layout "consolelayout", only: [:index, :show, :edit]
+  #layout "consolelayout", only: [:index, :show, :edit]
   
   def index
-    @users=User.all
-
+    render plain: "无权限"
   end
+
 
   def new
     @user=User.new
@@ -18,7 +18,15 @@ class UsersController < ApplicationController
   end
 
   def update
-
+    respond_to do |format|
+      if @user.update(user_params)
+        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        format.json { render :show, status: :ok, location: @product }
+      else
+        format.html { render :edit }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def edit
@@ -27,6 +35,7 @@ class UsersController < ApplicationController
 
   def create
     @user=User.new(user_params)
+    @user.level=3
     if @user.save
       sign_in @user
       redirect_to store_index_path

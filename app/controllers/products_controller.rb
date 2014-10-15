@@ -1,13 +1,14 @@
 class ProductsController < ApplicationController
   # include SessionsHelper
-  layout "consolelayout" ,only: [:index, :new, :edit]
+  # layout "consolelayout" ,only: [:index, :new, :edit]
   before_action :signed_in_user, only: [:edit, :update, :destroy, :create]
   before_action :set_product, only: [:show, :edit, :update, :destroy]
 
   # GET /products
   # GET /products.json
   def index
-    @products = Product.all
+    redirect_to store_path
+    # @products = Product.all
   end
 
   # GET /products/1

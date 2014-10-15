@@ -1,4 +1,6 @@
-class Admin::SessionsController < ApplicationController
+class Admin::SessionsController < Admin::BaseController
+
+  layout 'console_login'
 
   def new
     render layout: false
@@ -14,7 +16,7 @@ class Admin::SessionsController < ApplicationController
        #   redirect_to admin_console_path
        # end
        case user.level
-       when 3
+       when User::LEVEL_CUSTOMER
         then redirect_back_or user
       else
         redirect_to admin_console_index_path

@@ -1,6 +1,5 @@
-class Admin::ProductsController < ApplicationController
+class Admin::ProductsController < Admin::BaseController
   # include SessionsHelper
-  layout "consolelayout"
   before_action :signed_in_user, only: [:edit, :update, :destroy, :create]
   before_action :set_product, only: [:show, :edit, :update, :destroy]
 

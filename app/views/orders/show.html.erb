@@ -1,5 +1,6 @@
+<% if notice %>
 <p id="notice"><%= notice %></p>
-
+<% end %>
 <p>
   <strong>Name:</strong>
   <%= @order.name %>
@@ -19,6 +20,16 @@
   <strong>Pay type:</strong>
   <%= @order.pay_type %>
 </p>
-
-<%= link_to 'Edit', edit_order_path(@order) %> |
+<p>
+  <strong>订单内容</strong>
+  <% @order.line_items.each do |item| %>
+    <%= item.product.title %>
+  <% end %>
+</p>
+<p>
+  <strong>订单数量</strong>
+  <% @order.line_items.each do |item| %>
+    <%= item.quantity %>
+  <% end %>
+</p>
 <%= link_to 'Back', orders_path %>
