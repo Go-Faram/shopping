@@ -1,0 +1,12 @@
+// Place all the styles related to the admin/users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+form.newuser{
+  text-align: content
+  input#newuser_name{length:400px}
+  input#newuser_email,
+  input#newuser_password,
+  input#newuser_password_confirmation
+  input#newuser_level
+  
+}
